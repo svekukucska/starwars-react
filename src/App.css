@@ -4,4 +4,5 @@
 
 .page-container {
   min-height: calc(100vh - 70px);
+  padding-top: 100px; /* to avoid content to overlap with fixed header */
 }
