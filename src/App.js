@@ -3,8 +3,8 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import Footer from './modules/Footer';
-import MainMenu from './modules/MainMenu';
+import Footer from './components/Footer';
+import MainMenu from './components/MainMenu';
 
 class App extends Component {
   render() {
