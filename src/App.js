@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
 import MainMenu from './components/MainMenu';
+import { Container } from 'react-bootstrap';
 
 class App extends Component {
   render() {
@@ -13,11 +14,13 @@ class App extends Component {
         <div className="App">
           <MainMenu />
           <div className="page-container">
-            <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/home" exact component={Home} />
-              <Route component={NotFound} />
-            </Switch>
+            <Container>
+              <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/home" exact component={Home} />
+                <Route component={NotFound} />
+              </Switch>
+            </Container>
           </div>
           <Footer />
         </div>
