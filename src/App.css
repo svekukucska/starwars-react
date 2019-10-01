@@ -1,8 +1,4 @@
-.App {
-  text-align: center;
-}
-
 .page-container {
   min-height: calc(100vh - 56px);
-  padding-top: 100px; /* to avoid content to overlap with fixed header */
+  padding-top: 70px; /* to avoid content to overlap with fixed header */
 }
