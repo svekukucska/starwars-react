@@ -6,6 +6,7 @@ import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
 import MainMenu from './components/MainMenu';
 import { Container } from 'react-bootstrap';
+import StarWarsMovies from './pages/StarWarsMovies';
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/home" exact component={Home} />
+                <Route path="/movies" exact component={StarWarsMovies} />
                 <Route component={NotFound} />
               </Switch>
             </Container>
