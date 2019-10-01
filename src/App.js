@@ -3,8 +3,8 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import Footer from './components/Footer';
-import MainMenu from './components/MainMenu';
+import Footer from './modules/Footer';
+import MainMenu from './modules/MainMenu';
 import { Container } from 'react-bootstrap';
 import StarWarsMovies from './pages/StarWarsMovies';
 
@@ -18,7 +18,6 @@ class App extends Component {
             <Container>
               <Switch>
                 <Route path="/" exact component={Home} />
-                <Route path="/home" exact component={Home} />
                 <Route path="/movies" exact component={StarWarsMovies} />
                 <Route component={NotFound} />
               </Switch>

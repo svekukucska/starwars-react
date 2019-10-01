@@ -1,6 +1,6 @@
 import React from 'react';
-import './index.css'
-import { Container } from '../../../node_modules/react-bootstrap'
+import './index.css';
+import { Container } from 'react-bootstrap';
 
 const Footer = () => (
   <div className="footer" sticky="bottom">
