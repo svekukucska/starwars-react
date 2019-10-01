@@ -1,9 +1,12 @@
 import React from 'react';
 import './index.css'
+import { Container } from '../../../node_modules/react-bootstrap'
 
 const Footer = () => (
   <div className="footer" sticky="bottom">
-    <span>&copy; Copyright 2019</span>
+    <Container className="text-right">
+      <span>&copy; Copyright 2019</span>
+    </Container>
   </div>
 );
 
