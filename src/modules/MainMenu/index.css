@@ -1,0 +1,14 @@
+.nav-logo {
+  width: 90px;
+  margin: -5px 0;
+}
+
+/* Main Menu Font Size */
+.navbar-nav {
+  font-size: 18px;
+}
+
+/* Fix Dropdown on Hover */
+.App .dropdown-menu {
+  margin: 0;
+}
