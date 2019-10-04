@@ -1,8 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import './App.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../src/sass/main.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';

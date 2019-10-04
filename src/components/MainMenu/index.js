@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import navLogo from '../../assets/nav_logo.svg';
-import './index.scss';
 import { getMovies } from '../../helpers/getData';
 
 class MainMenu extends React.Component {
