@@ -1,11 +1,11 @@
 .nav-logo {
-  width: 90px;
+  width: 5*$spacer;
   margin: -5px 0;
 }
 
 /* Main Menu Font Size */
 .navbar-nav {
-  font-size: 18px;
+  font-size: $font-size-lg;
 }
 
 /* Fix Dropdown on Hover */

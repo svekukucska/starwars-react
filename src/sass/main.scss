@@ -1,0 +1,22 @@
+@import './bootstrap_custom.scss';
+@import './variables.scss';
+@import '../components/Footer/index.scss';
+@import '../components/MainMenu/index.scss';
+@import '../pages/Home/index.scss';
+
+.page-container {
+  min-height: calc(100vh - #{$footer-height});
+  padding-top: 64px;
+}
+
+body {
+  margin: 0;
+  font-family: $font-family-sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
