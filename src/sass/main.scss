@@ -1,11 +1,12 @@
 @import './bootstrap_custom.scss';
+@import './variables.scss';
 @import '../components/Footer/index.scss';
 @import '../components/MainMenu/index.scss';
 @import '../pages/Home/index.scss';
 
 .page-container {
-  min-height: calc(100vh - 56px);
-  padding-top: 70px;
+  min-height: calc(100vh - #{$footer-height});
+  padding-top: 64px;
 }
 
 body {
