@@ -7,6 +7,11 @@
 .page-container {
   min-height: calc(100vh - #{$footer-height});
   padding-top: 64px;
+
+  .container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
 }
 
 body {
