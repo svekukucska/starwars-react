@@ -3,34 +3,35 @@ import StarWarsMovies from './StarWarsMovies';
 import Movie from './Movie';
 import NotFound from './NotFound';
 
-export const Pages =
-  [
-    {
-      className: 'homepage',
-      component: Home,
-      props: {
-        path: '/',
-        exact: true,
-      }
+const Pages = [
+  {
+    className: 'homepage',
+    component: Home,
+    props: {
+      path: '/',
+      exact: true,
     },
-    {
-      className: 'movies',
-      component: StarWarsMovies,
-      props: {
-        path: '/movies',
-        exact: true,
-      }
+  },
+  {
+    className: 'movies',
+    component: StarWarsMovies,
+    props: {
+      path: '/movies',
+      exact: true,
     },
-    {
-      className: 'movie',
-      component: Movie,
-      props: {
-        path: '/movies/:episodeId',
-        exact: true,
-      }
-    },  
-    {
-      className: 'not-found',
-      component: NotFound,
-    }
-  ]
+  },
+  {
+    className: 'movie',
+    component: Movie,
+    props: {
+      path: '/movies/:episodeId',
+      exact: true,
+    },
+  },
+  {
+    className: 'not-found',
+    component: NotFound,
+  },
+];
+
+export default Pages;
