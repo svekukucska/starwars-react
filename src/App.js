@@ -1,35 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Footer from './components/Footer';
-import MainMenu from './components/MainMenu';
 import { Container } from 'react-bootstrap';
-import { Pages } from './pages/Routes';
+import MainMenu from './components/MainMenu';
+import Footer from './components/Footer';
+import Pages from './pages/Routes';
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <MainMenu />
-          <Switch >
-            {Pages.map(({ className, component: PageComponent, props }) => (
-              <Route {...props} key={`page-${className}`} render={(routeProps) => {
-                return (
-                  <div className={`page-container page-${className}`}>
-                    <Container>
-                      <PageComponent {...routeProps} />
-                    </Container>
-                  </div>
-                );
-              }} />
-            )
+const App = () => (
+  <Router>
+    <div className="App">
+      <MainMenu />
+      <Switch>
+        {Pages.map(({ className, component: PageComponent, props: { exact, path } = {} }) => (
+          <Route
+            exact={exact}
+            path={path}
+            key={`page-${className}`}
+            render={({ history, location, match }) => (
+              <div className={`page-container page-${className}`}>
+                <Container>
+                  <PageComponent history={history} location={location} match={match} />
+                </Container>
+              </div>
             )}
-          </Switch>
-          <Footer />
-        </div>
-      </Router >
-    );
-  }
-}
+          />
+        ))}
+      </Switch>
+      <Footer />
+    </div>
+  </Router>
+);
 
 export default App;
