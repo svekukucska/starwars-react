@@ -11,6 +11,7 @@ class Movie extends React.Component {
       releaseDate: '',
       director: '',
       openingCrawl: '',
+      planets: '',
     };
   }
 
@@ -19,10 +20,10 @@ class Movie extends React.Component {
     fetch(`https://swapi.co/api/films/${episodeId}`)
       .then((res) => res.json())
       .then(({
-        title, release_date: releaseDate, director, opening_crawl: openingCrawl,
+        title, release_date: releaseDate, director, opening_crawl: openingCrawl, planets,
       }) => {
         this.setState({
-          title, releaseDate, director, openingCrawl,
+          title, releaseDate, director, openingCrawl, planets,
         });
       });
   }
@@ -33,7 +34,9 @@ class Movie extends React.Component {
       releaseDate,
       director,
       openingCrawl,
+      planets,
     } = this.state;
+    console.log(planets);
     return (
       <>
         <h1>
@@ -57,6 +60,10 @@ class Movie extends React.Component {
           </Col>
         </Row>
         <p>{openingCrawl}</p>
+        <h2>Characters</h2>
+        {/* <ul>
+          <li></li>
+        </ul> */}
       </>
     );
   }
