@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import propTypes from 'prop-types';
 import { formatedDate } from '../../helpers/date';
+import Planet from '../../components/Planet/index';
 
 class Movie extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Movie extends React.Component {
       releaseDate: '',
       director: '',
       openingCrawl: '',
-      planets: '',
+      planets: [],
     };
   }
 
@@ -36,7 +37,6 @@ class Movie extends React.Component {
       openingCrawl,
       planets,
     } = this.state;
-    console.log(planets);
     return (
       <>
         <h1>
@@ -60,10 +60,10 @@ class Movie extends React.Component {
           </Col>
         </Row>
         <p>{openingCrawl}</p>
-        <h2>Characters</h2>
-        {/* <ul>
-          <li></li>
-        </ul> */}
+        <h2>Planets</h2>
+        <ul>
+          {planets.map((planetUrl) => <Planet planetUrl={planetUrl} key={planetUrl} />)}
+        </ul>
       </>
     );
   }
