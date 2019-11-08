@@ -8,6 +8,7 @@ class Movie extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       title: '',
       releaseDate: '',
@@ -19,22 +20,31 @@ class Movie extends React.Component {
   componentDidMount() {
     this.componentIsMounted = true;
     const { match: { params: { episodeId } = {} } = {} } = this.props;
-    fetch(`https://swapi.co/api/films/${episodeId}`)
-      .then((res) => res.json())
-      .then(({
-        title, release_date: releaseDate, director, opening_crawl: openingCrawl,
-      }) => {
-        if (this.componentIsMounted) {
-          this.setState({
-            title, releaseDate, director, openingCrawl,
-          });
-        }
-      });
+
+    this.getFilms(episodeId);
+  }
+
+  componentDidUpdate({ match: { params: { episodeId: prevEpisodeId } = {} } = {} }) {
+    const { match: { params: { episodeId } = {} } = {} } = this.props;
+
+    if (prevEpisodeId !== episodeId) {
+      this.getFilms(episodeId);
+    }
   }
 
   componentWillUnmount() {
     this.componentIsMounted = false;
   }
+
+  getFilms = (episodeId) => fetch(`https://swapi.co/api/films/${episodeId}`)
+    .then((res) => res.json())
+    .then(({
+      title, release_date: releaseDate, director, opening_crawl: openingCrawl,
+    }) => {
+      this.setState({
+        title, releaseDate, director, openingCrawl,
+      });
+    })
 
   render() {
     const {
@@ -43,6 +53,7 @@ class Movie extends React.Component {
       director,
       openingCrawl,
     } = this.state;
+
     return (
       <>
         <h1>
