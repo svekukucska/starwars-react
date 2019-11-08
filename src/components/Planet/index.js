@@ -1,5 +1,4 @@
 import React from 'react';
-import propTypes from 'prop-types';
 
 class Planet extends React.Component {
   constructor(props) {
@@ -20,13 +19,5 @@ class Planet extends React.Component {
     return <li>{name}</li>;
   }
 }
-
-Planet.propTypes = {
-  planetUrl: propTypes.string,
-};
-
-Planet.defaultProps = {
-  planetUrl: '',
-};
 
 export default Planet;

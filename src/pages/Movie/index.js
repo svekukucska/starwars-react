@@ -24,7 +24,7 @@ class Movie extends React.Component {
     fetch(`https://swapi.co/api/films/${episodeId}`)
       .then((res) => res.json())
       .then(({
-        title, release_date: releaseDate, director, opening_crawl: openingCrawl,
+        title, release_date: releaseDate, director, opening_crawl: openingCrawl, planets,
       }) => {
         if (this.componentIsMounted) {
           this.setState({
