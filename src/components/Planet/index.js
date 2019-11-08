@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 class Planet extends React.Component {
   constructor(props) {
@@ -9,13 +10,23 @@ class Planet extends React.Component {
   }
 
   componentDidMount() {
-    fetch(this.props.planetUrl).then((res) => res.json())
-      .then((res) => this.setState({ name: res.name }));
+    const { planetUrl } = this.props;
+    fetch(planetUrl).then((res) => res.json())
+      .then(({ name }) => this.setState({ name }));
   }
 
   render() {
-    return <li key={this.props.key}>{this.state.name}</li>;
+    const { name } = this.state;
+    return <li>{name}</li>;
   }
 }
+
+Planet.propTypes = {
+  planetUrl: propTypes.string,
+};
+
+Planet.defaultProps = {
+  planetUrl: '',
+};
 
 export default Planet;

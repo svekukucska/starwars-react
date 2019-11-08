@@ -5,6 +5,8 @@ import { formatedDate } from '../../helpers/date';
 import Planet from '../../components/Planet/index';
 
 class Movie extends React.Component {
+  componentIsMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,16 +19,23 @@ class Movie extends React.Component {
   }
 
   componentDidMount() {
+    this.componentIsMounted = true;
     const { match: { params: { episodeId } = {} } = {} } = this.props;
     fetch(`https://swapi.co/api/films/${episodeId}`)
       .then((res) => res.json())
       .then(({
-        title, release_date: releaseDate, director, opening_crawl: openingCrawl, planets,
+        title, release_date: releaseDate, director, opening_crawl: openingCrawl,
       }) => {
-        this.setState({
-          title, releaseDate, director, openingCrawl, planets,
-        });
+        if (this.componentIsMounted) {
+          this.setState({
+            title, releaseDate, director, openingCrawl,
+          });
+        }
       });
+  }
+
+  componentWillUnmount() {
+    this.componentIsMounted = false;
   }
 
   render() {

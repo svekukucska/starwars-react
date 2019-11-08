@@ -5,6 +5,8 @@ import getMovies from '../../helpers/getData';
 
 
 class StarWarsMovies extends React.Component {
+  componentIsMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +15,16 @@ class StarWarsMovies extends React.Component {
   }
 
   componentDidMount() {
-    getMovies().then(({ results }) => this.setState({ movies: results }));
+    this.componentIsMounted = true;
+    getMovies().then(({ results }) => {
+      if (this.componentIsMounted) {
+        this.setState({ movies: results });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.componentIsMounted = false;
   }
 
   render() {
