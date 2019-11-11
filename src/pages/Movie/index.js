@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import propTypes from 'prop-types';
 import { formatedDate } from '../../helpers/date';
 import Planet from '../../components/Planet/index';
+import Character from '../../components/Character/index';
 
 class Movie extends React.Component {
   componentIsMounted = false;
@@ -15,6 +16,7 @@ class Movie extends React.Component {
       releaseDate: '',
       director: '',
       openingCrawl: '',
+      characters: [],
       planets: [],
     };
   }
@@ -41,11 +43,11 @@ class Movie extends React.Component {
   getFilms = (episodeId) => fetch(`https://swapi.co/api/films/${episodeId}`)
     .then((res) => res.json())
     .then(({
-      title, release_date: releaseDate, director, opening_crawl: openingCrawl, planets,
+      title, release_date: releaseDate, director, opening_crawl: openingCrawl, characters, planets,
     }) => {
       if (this.componentIsMounted) {
         this.setState({
-          title, releaseDate, director, openingCrawl, planets,
+          title, releaseDate, director, openingCrawl, characters, planets,
         });
       }
     });
@@ -56,6 +58,7 @@ class Movie extends React.Component {
       releaseDate,
       director,
       openingCrawl,
+      characters,
       planets,
     } = this.state;
 
@@ -82,6 +85,15 @@ class Movie extends React.Component {
           </Col>
         </Row>
         <p>{openingCrawl}</p>
+        <h2>Characters</h2>
+        <ul>
+          {characters.map((characterUrl) => (
+            <Character
+              characterUrl={characterUrl}
+              key={characterUrl}
+            />
+          ))}
+        </ul>
         <h2>Planets</h2>
         <ul>
           {planets.map((planetUrl) => <Planet planetUrl={planetUrl} key={planetUrl} />)}
