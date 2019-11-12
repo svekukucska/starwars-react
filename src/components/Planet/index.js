@@ -2,6 +2,8 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 class Planet extends React.Component {
+  componentIsMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -10,9 +12,18 @@ class Planet extends React.Component {
   }
 
   componentDidMount() {
+    this.componentIsMounted = true;
     const { planetUrl } = this.props;
     fetch(planetUrl).then((res) => res.json())
-      .then(({ name }) => this.setState({ name }));
+      .then(({ name }) => {
+        if (this.componentIsMounted) {
+          this.setState({ name });
+        }
+      });
+  }
+
+  componentWillUnmount() {
+    this.componentIsMounted = false;
   }
 
   render() {

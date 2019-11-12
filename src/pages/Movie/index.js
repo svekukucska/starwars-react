@@ -43,10 +43,12 @@ class Movie extends React.Component {
     .then(({
       title, release_date: releaseDate, director, opening_crawl: openingCrawl, planets,
     }) => {
-      this.setState({
-        title, releaseDate, director, openingCrawl, planets,
-      });
-    })
+      if (this.componentIsMounted) {
+        this.setState({
+          title, releaseDate, director, openingCrawl, planets,
+        });
+      }
+    });
 
   render() {
     const {
