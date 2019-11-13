@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
+import getIdFromUrl from '../../helpers/url';
 
 class Planet extends React.Component {
   componentIsMounted = false;
@@ -28,7 +30,13 @@ class Planet extends React.Component {
 
   render() {
     const { name } = this.state;
-    return <li>{name}</li>;
+    const { planetUrl } = this.props;
+    const id = getIdFromUrl(planetUrl);
+    return (
+      <li>
+        <Link to={`/planet/${id}`}>{name}</Link>
+      </li>
+    );
   }
 }
 
