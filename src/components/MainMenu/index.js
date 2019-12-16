@@ -1,5 +1,8 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import {
+  NavLink,
+  withRouter,
+} from 'react-router-dom';
 import {
   Container,
   Navbar,
@@ -8,13 +11,13 @@ import {
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import navLogo from '../../assets/nav_logo.svg';
-import getMovies from '../../helpers/getData';
+import { connect } from 'react-redux';
+import fetchMovies from '../../actions/movies';
 
 class MainMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: null,
       dropdownOpen: false,
       expanded: false,
     };
@@ -23,14 +26,8 @@ class MainMenu extends React.Component {
   }
 
   componentDidMount() {
-    getMovies().then(({ results }) => {
-      const movies = results.sort(
-        (a, b) => (
-          (a.episode_id > b.episode_id) ? 1 : () => (((b.episode_id > a.episode_id) ? -1 : 0))
-        ),
-      );
-      this.setState({ movies });
-    });
+    const { getMovies } = this.props;
+    getMovies();
   }
 
   closeMainMenu = () => {
@@ -57,10 +54,10 @@ class MainMenu extends React.Component {
 
   render() {
     const {
-      movies,
       dropdownOpen,
       expanded,
     } = this.state;
+    const { movies } = this.props;
     const linkMovieList = (
       <span
         onClick={this.goToMovieList}
@@ -112,10 +109,25 @@ class MainMenu extends React.Component {
 
 MainMenu.propTypes = {
   history: PropTypes.shape(),
+  movies: PropTypes.arrayOf(PropTypes.shape()),
+  getMovies: PropTypes.func.isRequired,
 };
 
 MainMenu.defaultProps = {
   history: {},
+  movies: [],
 };
 
-export default withRouter(MainMenu);
+const mapStateToProps = ({ movies }) => {
+  return {
+    movieList: movies,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getMovies: () => dispatch(fetchMovies()),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainMenu));
