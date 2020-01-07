@@ -1,38 +1,22 @@
 import React from 'react';
 import { ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import getMovies from '../../helpers/getData';
-
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
+import { setMovies } from '../../actions/movies';
 
 class StarWarsMovies extends React.Component {
-  componentIsMounted = false;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      movies: [],
-    };
-  }
-
   componentDidMount() {
-    this.componentIsMounted = true;
-    getMovies().then(({ results }) => {
-      if (this.componentIsMounted) {
-        this.setState({ movies: results });
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    this.componentIsMounted = false;
+    const { getMovies = () => {} } = this.props;
+    getMovies();
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies } = this.props;
     return (
       <ListGroup>
         {movies.map(({ title, episode_id: episodeId }) => (
-          <ListGroup.Item key={episodeId}>
+          <ListGroup.Item key={episodeId + Math.random()}>
             <Link to={`/movies/${episodeId}`}>{title}</Link>
           </ListGroup.Item>
         ))}
@@ -41,4 +25,21 @@ class StarWarsMovies extends React.Component {
   }
 }
 
-export default StarWarsMovies;
+const mapStateToProps = ({ movies: { movies } }) => ({
+  movies,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getMovies: () => dispatch(setMovies()),
+});
+
+StarWarsMovies.propTypes = {
+  getMovies: propTypes.func.isRequired,
+  movies: propTypes.arrayOf(propTypes.shape),
+};
+
+StarWarsMovies.defaultProps = {
+  movies: [],
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(StarWarsMovies);

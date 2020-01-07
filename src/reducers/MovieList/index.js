@@ -1,4 +1,4 @@
-import { MOVIE_LIST_RECEIVED } from "../../actions/action-types";
+import { MOVIE_LIST_RECEIVED } from '../../actions/action-types';
 
 const initialState = {
   movies: [],
@@ -10,9 +10,9 @@ const MovieList = (state = initialState, { type, results }) => {
       return {
         ...state,
         movies: results,
-      }
+      };
     default:
-      return state
+      return state;
   }
 };
 

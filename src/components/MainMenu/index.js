@@ -10,8 +10,8 @@ import {
   NavDropdown,
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import navLogo from '../../assets/nav_logo.svg';
 import { connect } from 'react-redux';
+import navLogo from '../../assets/nav_logo.svg';
 import fetchMovies from '../../actions/movies';
 
 class MainMenu extends React.Component {
@@ -118,16 +118,16 @@ MainMenu.defaultProps = {
   movies: [],
 };
 
-const mapStateToProps = ({ movies }) => {
-  return {
-    movieList: movies,
+const mapStateToProps = ({ MovieListReducer }) => (
+  {
+    movies: MovieListReducer.movies,
   }
-};
+);
 
-const mapDispatchToProps = (dispatch) => {
-  return {
+const mapDispatchToProps = (dispatch) => (
+  {
     getMovies: () => dispatch(fetchMovies()),
   }
-};
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainMenu));
