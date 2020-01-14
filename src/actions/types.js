@@ -1,3 +1,3 @@
-const TAKE_MOVIES = 'TAKE_MOVIES';
+export const TAKE_MOVIES = 'TAKE_MOVIES';
 
-export default TAKE_MOVIES;
+export const SET_FETCHING = 'SET_FETCHING';

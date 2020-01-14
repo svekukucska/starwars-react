@@ -1,4 +1,4 @@
-import TAKE_MOVIES from '../actions/types';
+import { TAKE_MOVIES } from '../actions/types';
 
 const initialState = {
   movies: [],

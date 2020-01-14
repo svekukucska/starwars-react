@@ -118,16 +118,14 @@ MainMenu.defaultProps = {
   movies: [],
 };
 
-const mapStateToProps = ({ MovieListReducer }) => (
+const mapStateToProps = ({ movies: { movies } }) => (
   {
-    movies: MovieListReducer.movies,
+    movies,
   }
 );
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    getMovies: () => dispatch(fetchMovies()),
-  }
-);
+const mapDispatchToProps = {
+  getMovies: fetchMovies,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainMenu));
