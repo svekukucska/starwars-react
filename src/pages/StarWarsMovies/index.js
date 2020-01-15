@@ -3,7 +3,7 @@ import { ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import { setMovies } from '../../actions/movies';
+import fetchMovies from '../../actions/movies';
 
 class StarWarsMovies extends React.Component {
   componentDidMount() {
@@ -29,9 +29,9 @@ const mapStateToProps = ({ movies: { movies } }) => ({
   movies,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getMovies: () => dispatch(setMovies()),
-});
+const mapDispatchToProps = {
+  getMovies: fetchMovies,
+};
 
 StarWarsMovies.propTypes = {
   getMovies: propTypes.func.isRequired,

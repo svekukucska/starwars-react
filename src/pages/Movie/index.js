@@ -66,21 +66,23 @@ class Movie extends React.Component {
       <>
         <h1>
           Title:
-          <span>{title}</span>
+          {` ${title}`}
         </h1>
         <Row>
           <Col>
             <p>
               Release date:
               <span className="text-primary font-weight-bold">
-                {formatedDate(releaseDate)}
+                {` ${formatedDate(releaseDate)}`}
               </span>
             </p>
           </Col>
           <Col>
             <p>
               Director:
-              <span className="text-primary font-weight-bold">{director}</span>
+              <span className="text-primary font-weight-bold">
+                {` ${director}`}
+              </span>
             </p>
           </Col>
         </Row>
