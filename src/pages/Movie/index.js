@@ -1,66 +1,43 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+} from 'react-bootstrap';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { formatedDate } from '../../helpers/date';
 import Planet from '../../components/Planet/index';
 import Character from '../../components/Character/index';
+import { fetchMovie } from '../../actions/movies';
 
 class Movie extends React.Component {
-  componentIsMounted = false;
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      title: '',
-      releaseDate: '',
-      director: '',
-      openingCrawl: '',
-      characters: [],
-      planets: [],
-    };
-  }
-
   componentDidMount() {
-    this.componentIsMounted = true;
-    const { match: { params: { episodeId } = {} } = {} } = this.props;
+    const { match: { params: { movieId } = {} } = {} } = this.props;
 
-    this.getFilms(episodeId);
-  }
-
-  componentDidUpdate({ match: { params: { episodeId: prevEpisodeId } = {} } = {} }) {
-    const { match: { params: { episodeId } = {} } = {} } = this.props;
-
-    if (prevEpisodeId !== episodeId) {
-      this.getFilms(episodeId);
+    if (movieId) {
+      const { getMovie } = this.props;
+      getMovie(movieId);
     }
   }
 
-  componentWillUnmount() {
-    this.componentIsMounted = false;
-  }
+  componentDidUpdate({ match: { params: { movieId: prevMovieId } = {} } = {} }) {
+    const { match: { params: { movieId } = {} } = {} } = this.props;
 
-  getFilms = (episodeId) => fetch(`https://swapi.co/api/films/${episodeId}`)
-    .then((res) => res.json())
-    .then(({
-      title, release_date: releaseDate, director, opening_crawl: openingCrawl, characters, planets,
-    }) => {
-      if (this.componentIsMounted) {
-        this.setState({
-          title, releaseDate, director, openingCrawl, characters, planets,
-        });
-      }
-    });
+    if (prevMovieId !== movieId) {
+      const { getMovie } = this.props;
+      getMovie(movieId);
+    }
+  }
 
   render() {
     const {
       title,
-      releaseDate,
+      release_date: releaseDate,
       director,
-      openingCrawl,
-      characters,
-      planets,
-    } = this.state;
+      opening_crawl: openingCrawl,
+      characters = [],
+      planets = [],
+    } = this.props;
 
     return (
       <>
@@ -105,12 +82,37 @@ class Movie extends React.Component {
   }
 }
 
+const mapStateToProps = (
+  { movies = [] },
+  { match: { params: { movieId } = {} } = {} },
+) => {
+  const movie = movies.find((element) => element.id === movieId);
+  return movie || {};
+};
+
+const mapDispatchToProps = {
+  getMovie: fetchMovie,
+};
+
 Movie.propTypes = {
   match: propTypes.shape(),
+  title: propTypes.string,
+  release_date: propTypes.string,
+  director: propTypes.string,
+  opening_crawl: propTypes.string,
+  characters: propTypes.arrayOf(propTypes.string),
+  planets: propTypes.arrayOf(propTypes.string),
+  getMovie: propTypes.func.isRequired,
 };
 
 Movie.defaultProps = {
   match: {},
+  title: '',
+  release_date: '',
+  director: '',
+  opening_crawl: '',
+  characters: [],
+  planets: [],
 };
 
-export default Movie;
+export default connect(mapStateToProps, mapDispatchToProps)(Movie);

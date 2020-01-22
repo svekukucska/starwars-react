@@ -1,17 +1,25 @@
-import { TAKE_MOVIES } from '../actions/types';
+import {
+  TAKE_MOVIES,
+  SET_MOVIE,
+} from '../actions/types';
 
-const initialState = {
-  movies: [],
-};
+const initialState = [];
 
-const reducer = (state = initialState, { type, results }) => {
-  if (type === TAKE_MOVIES) {
-    return {
-      ...state,
-      movies: results,
-    };
+const reducer = (state = initialState, { type, results, movie }) => {
+  switch (type) {
+    case TAKE_MOVIES:
+      return [
+        ...state,
+        ...results,
+      ];
+    case SET_MOVIE:
+      return [
+        ...state,
+        movie,
+      ];
+    default:
+      return state;
   }
-  return state;
 };
 
 export default reducer;

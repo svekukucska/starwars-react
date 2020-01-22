@@ -24,7 +24,7 @@ const Pages = [
     className: 'movie',
     component: Movie,
     props: {
-      path: '/movies/:episodeId',
+      path: '/movies/:movieId',
       exact: true,
     },
   },
