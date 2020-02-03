@@ -15,9 +15,9 @@ class StarWarsMovies extends React.Component {
     const { movies } = this.props;
     return (
       <ListGroup>
-        {movies.map(({ title, episode_id: episodeId }) => (
-          <ListGroup.Item key={episodeId + Math.random()}>
-            <Link to={`/movies/${episodeId}`}>{title}</Link>
+        {movies.map(({ title, id }) => (
+          <ListGroup.Item key={id + Math.random()}>
+            <Link to={`/movies/${id}`}>{title}</Link>
           </ListGroup.Item>
         ))}
       </ListGroup>
@@ -25,7 +25,7 @@ class StarWarsMovies extends React.Component {
   }
 }
 
-const mapStateToProps = ({ movies: { movies } }) => ({
+const mapStateToProps = ({ movies }) => ({
   movies,
 });
 

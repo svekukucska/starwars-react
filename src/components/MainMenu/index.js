@@ -92,8 +92,8 @@ class MainMenu extends React.Component {
                 onMouseLeave={this.handleDropdownClose}
                 show={dropdownOpen}
               >
-                {movies && movies.map(({ episode_id: episodeId, title }) => (
-                  <NavDropdown.Item as={NavLink} to={`/movies/${episodeId}`} key={episodeId} onClick={this.closeMainMenu}>
+                {movies && movies.map(({ id, title }) => (
+                  <NavDropdown.Item as={NavLink} to={`/movies/${id}`} key={id} onClick={this.closeMainMenu}>
                     {title}
                   </NavDropdown.Item>
                 ))}
@@ -118,7 +118,7 @@ MainMenu.defaultProps = {
   movies: [],
 };
 
-const mapStateToProps = ({ movies: { movies } }) => (
+const mapStateToProps = ({ movies }) => (
   {
     movies,
   }
