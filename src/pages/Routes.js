@@ -1,6 +1,7 @@
 import Home from './Home';
 import StarWarsMovies from './StarWarsMovies';
 import Movie from './Movie';
+import Planets from './Planets';
 import NotFound from './NotFound';
 
 const Pages = [
@@ -25,6 +26,14 @@ const Pages = [
     component: Movie,
     props: {
       path: '/movies/:movieId',
+      exact: true,
+    },
+  },
+  {
+    className: 'planets',
+    component: Planets,
+    props: {
+      path: '/planets',
       exact: true,
     },
   },

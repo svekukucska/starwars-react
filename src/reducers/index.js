@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import moviesReducer from './movies';
+import planetsReducer from './planets';
 import fetchingReducer from './fetching';
 
-const rootReducers = combineReducers({
+const rootReducer = combineReducers({
   movies: moviesReducer,
+  planets: planetsReducer,
   fetching: fetchingReducer,
-
 });
 
-export default rootReducers;
+export default rootReducer;
