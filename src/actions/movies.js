@@ -52,8 +52,8 @@ const fetchMovies = () => (dispatch, getState) => {
   if (!movies) {
     dispatch(setFetching('movies', true));
     getMovies().then(({ results }) => {
-      const movies = results.map((movie) => ({ ...movie, id: getIdFromUrl(movie.url) }));
-      dispatch(setMoviesAction(movies));
+      const fetchedMovies = results.map((movie) => ({ ...movie, id: getIdFromUrl(movie.url) }));
+      dispatch(setMoviesAction(fetchedMovies));
     });
   }
 };
