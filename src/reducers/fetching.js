@@ -7,7 +7,7 @@ const initialState = {
   movies: false,
   planets: false,
   movie: {},
-
+  planet: {},
 };
 
 const reducer = (state = initialState, action) => {
