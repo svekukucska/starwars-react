@@ -1,37 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 import getIdFromUrl from '../../helpers/url';
+import { fetchPlanet } from '../../actions/planets';
 
 class Planet extends React.Component {
-  componentIsMounted = false;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-    };
-  }
-
   componentDidMount() {
-    this.componentIsMounted = true;
     const { planetUrl } = this.props;
-    fetch(planetUrl).then((res) => res.json())
-      .then(({ name }) => {
-        if (this.componentIsMounted) {
-          this.setState({ name });
-        }
-      });
-  }
+    const planetId = getIdFromUrl(planetUrl);
 
-  componentWillUnmount() {
-    this.componentIsMounted = false;
+    if (planetId) {
+      const { getPlanet } = this.props;
+      getPlanet(planetId);
+    }
   }
 
   render() {
-    const { name } = this.state;
-    const { planetUrl } = this.props;
-    const id = getIdFromUrl(planetUrl);
+    const { name, id } = this.props;
+
     return (
       <li>
         <Link to={`/planet/${id}`}>{name}</Link>
@@ -42,10 +29,25 @@ class Planet extends React.Component {
 
 Planet.propTypes = {
   planetUrl: propTypes.string,
+  name: propTypes.string,
+  id: propTypes.string,
+  getPlanet: propTypes.func.isRequired,
 };
 
 Planet.defaultProps = {
   planetUrl: '',
+  name: '',
+  id: '',
 };
 
-export default Planet;
+const mapStateToProps = ({ planets = [] }, { planetUrl }) => {
+  const planetId = getIdFromUrl(planetUrl);
+  const planet = planets.find((element) => element.id === planetId);
+  return planet || {};
+};
+
+const mapDispatchToProps = {
+  getPlanet: fetchPlanet,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Planet);
