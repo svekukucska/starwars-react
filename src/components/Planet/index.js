@@ -19,11 +19,12 @@ class Planet extends React.Component {
   render() {
     const { name, id } = this.props;
 
-    return (
+    return name ? (
       <li>
         <Link to={`/planet/${id}`}>{name}</Link>
       </li>
-    );
+    )
+      : null;
   }
 }
 
