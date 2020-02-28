@@ -1,51 +1,54 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 import getIdFromUrl from '../../helpers/url';
+import fetchCharacter from '../../actions/characters';
 
 class Character extends React.Component {
-  componentIsMounted = false;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-    };
-  }
-
   componentDidMount() {
-    this.componentIsMounted = true;
     const { characterUrl } = this.props;
-    fetch(characterUrl).then((res) => res.json())
-      .then(({ name }) => {
-        if (this.componentIsMounted) {
-          this.setState({ name });
-        }
-      });
-  }
+    const characterId = getIdFromUrl(characterUrl);
 
-  componentWillUnmount() {
-    this.componentIsMounted = false;
+    if (characterId) {
+      const { getCharacter } = this.props;
+      getCharacter(characterId);
+    }
   }
 
   render() {
-    const { name } = this.state;
-    const { characterUrl } = this.props;
-    const id = getIdFromUrl(characterUrl);
-    return (
+    const { name, id } = this.props;
+
+    return name ? (
       <li>
         <Link to={`/character/${id}`}>{name}</Link>
       </li>
-    );
+    )
+      : null;
   }
 }
 
 Character.propTypes = {
   characterUrl: propTypes.string,
+  name: propTypes.string,
+  id: propTypes.string,
+  getCharacter: propTypes.func.isRequired,
 };
 
 Character.defaultProps = {
   characterUrl: '',
+  name: '',
+  id: '',
 };
 
-export default Character;
+const mapStateToProps = ({ characters = [] }, { characterUrl }) => {
+  const characterId = getIdFromUrl(characterUrl);
+  const character = characters.find((element) => element.id === characterId);
+  return character || {};
+};
+
+const mapDispatchToProps = {
+  getCharacter: fetchCharacter,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Character);

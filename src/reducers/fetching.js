@@ -6,8 +6,10 @@ import {
 const initialState = {
   movies: false,
   planets: false,
+  characters: false,
   movie: {},
   planet: {},
+  character: {},
 };
 
 const reducer = (state = initialState, action) => {
