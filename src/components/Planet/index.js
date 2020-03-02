@@ -21,7 +21,7 @@ class Planet extends React.Component {
 
     return name ? (
       <li>
-        <Link to={`/planet/${id}`}>{name}</Link>
+        <Link to={`/planets/${id}`}>{name}</Link>
       </li>
     )
       : null;
