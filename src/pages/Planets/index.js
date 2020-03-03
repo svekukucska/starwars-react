@@ -39,8 +39,8 @@ class Planets extends React.Component {
               <Col xs={12} md={6} className="p-3">
                 <Image src={`https://starwars-visualguide.com/assets/img/planets/${getIdFromUrl(urlPlanetsKey)}.jpg`} fluid className="mx-auto" />
               </Col>
-              <Col className="p-3">
-                <h3>
+              <Col className="p-3 text-line-height">
+                <h3 className="headings-padding">
                   <span>{`${name}`}</span>
                 </h3>
                 <p>
