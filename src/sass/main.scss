@@ -3,6 +3,7 @@
 @import '../components/Footer/index.scss';
 @import '../components/MainMenu/index.scss';
 @import '../pages/Home/index.scss';
+@import '../pages/Planets/index.scss';
 
 .page-container {
   min-height: calc(100vh - #{$footer-height});
